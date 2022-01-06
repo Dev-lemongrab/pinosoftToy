@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pino.ys.dto.insertDto;
 import com.pino.ys.dto.setDto;
 import com.pino.ys.service.InsaServiceImpl;
 
@@ -29,12 +30,17 @@ public class RegistController {
 		mov.setViewName("regist");
 		return mov;
 	}
+	
 	@RequestMapping(value="/regist/idCheck")
 	@ResponseBody
 	public int idCheck(String input) {
 		int cnt = insaServiceImpl.idCheck(input);
-		System.out.println(cnt);
 		return cnt;
+	}
+	@RequestMapping(value = "/regist/input")
+	public String input(insertDto dto) {
+		insaServiceImpl.input(dto);
+		return "redirect:/regist";
 	}
 	
 	

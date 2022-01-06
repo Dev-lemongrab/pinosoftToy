@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Service;
 
+import com.pino.ys.dto.insertDto;
 import com.pino.ys.dto.setDto;
 
 
@@ -14,4 +15,6 @@ public interface InsaDao {
 	public ArrayList<setDto> setService(); 
 	
 	public int idCheck(String input);
+
+	public void input(insertDto dto);
 }

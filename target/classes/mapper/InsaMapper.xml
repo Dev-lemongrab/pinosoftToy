@@ -2,11 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pino.ys.dao.InsaDao">
+	
+	
 	<select id="setService" resultType="com.pino.ys.dto.setDto">
 		select * from insa_com		
 	</select>
 	<select id="idCheck" resultType="int">
-		select count(*) from insa where id = '${input}'
+		select count(*) from insa where id = #{input}
 	</select>
+	<update id="input" parameterType="com.pino.ys.dto.insertDto">
+			
+			insert into insa values(
+			(select (max(sabun)+1) from insa),  #{join_day, jdbcType=VARCHAR}, #{retire_day, jdbcType=VARCHAR}, #{put_yn, jdbcType=VARCHAR}, 
+			#{name}, #{reg_no, jdbcType=VARCHAR}, #{eng_name}, #{phone, jdbcType=VARCHAR}, #{hp}, #{carrier, jdbcType=VARCHAR}, 
+			#{pos_gbn_code, jdbcType=VARCHAR}, #{cmp_reg_no, jdbcType=VARCHAR}, #{cmp_reg_image, jdbcType=VARCHAR},  #{sex, jdbcType=VARCHAR},  #{years, jdbcType=VARCHAR},  #{email},  #{zip, jdbcType=VARCHAR},  #{addr1, jdbcType=VARCHAR},  #{addr2, jdbcType=VARCHAR}, 
+			#{dept_code, jdbcType=VARCHAR},  #{join_gbn_code, jdbcType=VARCHAR},  #{id},  #{pwd},  #{salary, jdbcType=VARCHAR},  #{kosa_reg_yn, jdbcType=VARCHAR},  #{kosa_class_code, jdbcType=VARCHAR},  #{mil_yn, jdbcType=VARCHAR},  
+			#{mil_level, jdbcType=VARCHAR},  #{mil_type, jdbcType=VARCHAR},  #{mil_startdate, jdbcType=VARCHAR},  #{mil_enddate, jdbcType=VARCHAR},  #{job_type, jdbcType=VARCHAR},  #{gart_level, jdbcType=VARCHAR},  #{self_intro, jdbcType=VARCHAR},  
+			#{crm_name, jdbcType=VARCHAR},  #{profile, jdbcType=VARCHAR}
+			
+			)
+	</update>
+
+
 </mapper>
 
+	
+	

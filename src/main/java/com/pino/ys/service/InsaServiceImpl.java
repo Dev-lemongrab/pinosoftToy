@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pino.ys.dao.InsaDao;
+import com.pino.ys.dto.insertDto;
 import com.pino.ys.dto.setDto;
 
 @Service
@@ -23,5 +24,8 @@ public class InsaServiceImpl implements InsaService {
 	public int idCheck(String input) {
 		return insaDao.idCheck(input);
 	}
-
+	@Override
+	public void input(insertDto dto) {
+		insaDao.input(dto);
+	}
 }

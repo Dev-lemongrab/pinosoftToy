@@ -29,29 +29,46 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style type="text/css">
-body {
+	body {
+		
+	}
 	
-}
-
-.navbar-nav {
-	float: right !important;
-	margin: 0;
-}
-
-label {
-	width: 100px;
-	text-align: center;
-	color: white;
-}
-
-#h2 {
-	width: 300px;
-	text-align: left;
-}
+	.navbar-nav {
+		float: right !important;
+		margin: 0;
+	}
+	
+	label {
+		width: 100px;
+		text-align: center;
+		color: white;
+	}
+	
+	#h2 {
+		width: 300px;
+		text-align: left;
+	}
+	.form-control {
+		width : 200.4px !important;
+	}
+	.button {
+		width : 150px !important;
+	}
+	.rightBut {
+		width : 60px !important;
+		padding:2px;
+	}
+	.section{
+		width:200px;
+	}
+	.section input{
+		width:100px;
+	}
 </style>
 
 
@@ -60,165 +77,193 @@ label {
 <body style="background-color: black;">
 	<%@include file="include/header.jsp"%>
 	<div class="container">
-		<h2>
-			<label id="h2">직원상세정보</label>
-		</h2>
-		<form class="form-inline" action="/action_page.php" method="post">
-			<div class="form-group">
-				<input type="submit" value="등록" class="form-control"> <input
-					type="submit" value="전화면" onclick="history.back()"
-					class="form-control"> <input type="reset" value="초기화"
-					class="form-control">
+		
+		<form class="form-inline" action="/regist/input" method="post">
+			<div>
+				<label id="h2" style="padding-bottom: 30px"><h2>직원상세정보</h2></label>
+				<div class="form-group"  style="float:right; padding-top:20px;" >
+						<input type="submit" value="등록" class="form-control rightBut" onclick="confirm('등록하시겠습니까?')">
+						<input type="submit" value="전화면" onclick="history.back()" class="form-control rightBut"> 
+						<input type="reset" value="초기화" class="form-control rightBut">
+				</div>
 			</div>
-			<div class="form-group">
-				<label>입사구분</label> <select class="form-control" id="join_gbn_code"
-					name="join_gbn_code"><option></option></select>
+			<!-- 첫번째 div -->
+			<div class="form-group section">
+				<!--사진올리기  -->
+				<div class="form-group">
+					<input type="button" class="form-control" id="faceImg" name="faceImg" value="사진올리기">
+				</div>
+				<!-- 사진올리기 -->
+				<div class="form-group">
+					<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>군별</label> <select class="form-control mil yn" id="mil_type"
+						name="mil_type"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn"
+						name="kosa_reg_yn"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>사업자번호</label> <input type="text" class="form-control hyphen"
+						id="cmp_reg_no" name="cmp_reg_no">
+				</div>				
 			</div>
-			<div class="form-group">
-				<label>사번</label> <input type="text" class="form-control"
-					disabled="disabled" id="sabun" name="sabun">
-			</div>
-			<div class="form-group">
-				<label>*한글성명</label> <input type="text"
-					class="form-control validate" id="name" name="name"
-					required="required" />
-			</div>
-			<div class="form-group">
-				<label>영문성명</label> <input type="text" class="form-control validate"
-					id="eng_name" name="eng_name" />
-			</div>
-			<div class="form-group">
+			<!-- 두번째 div -->
+			<div class="form-group section">
+				<div class="form-group">
+					<label>사번</label> <input type="text" class="form-control"
+						disabled="disabled" id="sabun" name="sabun">
+				</div>
+				<div class="form-group">
 				<label>*아이디</label> <input type="text"
 					class="form-control duplicate" id="id" name="id"
 					required="required">
+				</div>
+				<div class="form-group">
+					<label>전화번호</label> <input type="text" class="form-control hyphen"
+						id="phone" name="phone">
+				</div>
+				<div class="form-group">
+					<label>연령</label> <input type="text" class="form-control" id="years"
+						name="years">
+				</div>
+				<div class="form-group">
+					<label>주소</label> <input type="text" class="form-control" id="zip"
+						name="zip" placeholder="우편번호"> &nbsp;&nbsp;&nbsp;
+					<button class="form-control" id ="search">주소검색</button> 
+				</div>
+				<div class="form-group">
+					<label>직위</label> <select class="form-control" id="pos_gbn_code" name="position"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>등급</label> <select class="form-control" id="gart_level"
+						name="grade"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>계급</label> <select class="form-control mil" id="mil_level"
+						name="mil_level"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>KOSA등급</label> <select class="form-control kosa"
+						id="kosa_class_code" name="kosa_class_code"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>업체명</label> <input type="text" class="form-control"
+						id="crm_name" name="crm_name">
+				</div>
 			</div>
-			<div class="form-group">
-				<label>*패스워드</label> <input type="password" class="form-control"
-					id="pwd" name="pwd" required="required">
+			<!-- 세번째 div -->
+			<div class="form-group section" >
+				<div class="form-group">
+					<label>*한글성명</label> <input type="text" class="form-control validate" id="name" name="name" required="required" />
+				</div>
+				<div class="form-group">
+					<label>*패스워드</label> <input type="password" class="form-control"
+						id="pwd" name="pwd" required="required">
+				</div>
+				<div class="form-group">
+					<label>*핸드폰 번호</label> <input type="text" class="form-control hyphen"
+						id="hp" name="hp" required="required">
+				</div>
+				<div class="form-group">
+					<label>*이메일</label> <input type="text" class="form-control"
+						id="email1" name="email1" required="required">
+					&nbsp;&nbsp;&nbsp;&nbsp; <select class="form-control" id="email"
+						name="email"><option></option></select>
+				</div>
+					<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소">
+				<div class="form-group">
+					<label>부서</label> <select class="form-control" id="dept_code"
+						name="dept_code"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>투입여부</label> <select class="form-control" id="put_yn"
+						name="put_yn"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>입영일자</label> <input type="text" class="form-control mil datepicker"
+						id="mil_startdate" name="mil_startdate">
+				</div>
+				<div class="form-group">
+					<label>입사일자</label> <input type="text" class="form-control datepicker"
+						id="join_day" name="join_day">
+				</div>
+				<div class="form-group">
+					<label>사업자등록증</label> <input type="text" class="form-control"
+						id="cmp_reg_image" name="cmp_reg_image">
+				</div>
+				<div class="form-group">
+				<label>사업자등록증</label> <input type="text" class="form-control"
+					id="cmp_reg_image" name="cmp_reg_image">
+				
 			</div>
-			<div class="form-group">
-				<label>*패스워드 확인</label> <input type="password"
-					class="form-control pwdChk" id="pwChk" name="pwChk"
-					required="required">
 			</div>
-			<div class="form-group">
-				<label>전화번호</label> <input type="text" class="form-control hyphen"
-					id="phone" name="phone">
+			<!-- 네번째 div -->
+			<div class="form-group section">
+				<div class="form-group">
+					<label>영문성명</label> <input type="text" class="form-control validate" id="eng_name" name="eng_name" />
+				</div>
+				<div class="form-group">
+					<label>*패스워드 확인</label> <input type="password"
+						class="form-control pwdChk" id="pwChk" name="pwChk"
+						required="required">
+				</div>
+				<div class="form-group">
+					<label>*주민번호</label> <input type="text" class="form-control hyphen" id="reg_no1" name="reg_no1" required="required" maxlength="14">
+										  <input type="hidden" id="reg_no" name="reg_no">
+				</div>
+				<div class="form-group">
+					<label>직종체크</label> <select class="form-control" id="job_type"
+						name="job_type"><option></option></select>
+				</div>
+				<div class="form-group">
+					<label>성별</label> <select class="form-control" id="sex" name="sex"><option></option></select>
+				</div>
+					<input type="text" class="form-control" id="addr2" name="addr2" placeholder="세부주소">
+				<div class="form-group">
+					<label>연봉(만원)</label> <input type="text" class="form-control"
+						id="salary" name="salary" style="text-align:right">
+				</div>
+				<div class="form-group">
+					<label>군필여부</label> <select class="form-control yn" id="mil_yn"
+						name="mil_yn"><option></option></select>
+				</div>
+				<div class="form-group">
+				<label>전역일자</label> <input type="text" class="form-control mil datepicker endDate"
+					id="mil_enddate" name="mil_enddate">
+				</div>
+				<div class="form-group">
+					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate"
+						id="retire_day" name="retire_day">
+				</div>
+				<div class = "form-control">
+					<button class="form-control button">미리보기</button>
+					<button class="form-control button">등록</button>
+					<button class="form-control button">미리보기</button>
+					<button class="form-control button">파일업로드</button>
+				</div>
 			</div>
-			<div class="form-group">
-				<label>*핸드폰 번호</label> <input type="text" class="form-control hyphen"
-					id="hp" name="hp" required="required">
-			</div>
-			<div class="form-group">
-				<label>*주민번호</label> <input type="text" class="form-control hyphen"
-					id="reg_no" name="reg_no" required="required" maxlength="14" value=>
-			</div>
-			<div class="form-group">
-				<label>연령</label> <input type="text" class="form-control" id="years"
-					name="years">
-			</div>
-			<div class="form-group">
-				<label>*이메일</label> <input type="text" class="form-control"
-					id="email1" name="email1" required="required">
-				&nbsp;&nbsp;&nbsp;&nbsp; <select class="form-control" id="email"
-					name="email"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>직종체크</label> <select class="form-control" id="job_type"
-					name="job_type"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>성별</label> <select class="form-control" id="sex" name="sex"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>주소</label> <input type="text" class="form-control" id="zip"
-					name="zip" placeholder="우편번호"> &nbsp;&nbsp;&nbsp;
-				<button class="form-control">주소검색</button>
-				&nbsp;&nbsp;&nbsp; <input type="text" class="form-control"
-					id="addr1" name="adr" placeholder="주소">&nbsp;&nbsp;&nbsp; <input
-					type="text" class="form-control" id="Addr2" name="detailAdr"
-					placeholder="세부주소">
-			</div>
-			<div class="form-group">
-				<label>직위</label> <select class="form-control" id="pos_gbn_code"
-					name="position"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>부서</label> <select class="form-control" id="dept_code"
-					name="dept_code"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>등급</label> <select class="form-control" id="gart_level"
-					name="grade"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>투입여부</label> <select class="form-control" id="put_yn"
-					name="put_yn"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>군필여부</label> <select class="form-control" id="mil_yn"
-					name="mil_yn"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>연봉(만원)</label> <input type="text" class="form-control"
-					id="salary" name="salary">
-			</div>
-			<div class="form-group">
-				<label>군별</label> <select class="form-control mil" id="mil_type"
-					name="mil_type"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>계급</label> <select class="form-control mil" id="mil_level"
-					name="mil_level"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>입영일자</label> <input type="text" class="form-control mil"
-					id="datepicker" name="mil_startdate">
-			</div>
-			<div class="form-group">
-				<label>전역일자</label> <input type="text" class="form-control mil"
-					id="datepicker" name="mil_enddate">
-			</div>
-			<div class="form-group">
-				<label>KOSA등록</label> <select class="form-control" id="kosa_reg_yn"
-					name="kosa_reg_yn"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>KOSA등급</label> <select class="form-control"
-					id="kosa_class_code" name="kosa_class_code"><option></option></select>
-			</div>
-			<div class="form-group">
-				<label>입사일자</label> <input type="text" class="form-control"
-					id="datepicker" name="join_day">
-			</div>
-			<div class="form-group">
-				<label>퇴사일자</label> <input type="text" class="form-control"
-					id="datepicker" name="retire_day">
-			</div>
-			<div class="form-group">
-				<label>사업자번호</label> <input type="text" class="form-control hyphen"
-					id="cmp_reg_no" name="cmp_reg_no">
-			</div>
-			<div class="form-group">
-				<label>업체명</label> <input type="text" class="form-control"
-					id="crm_name" name="crm_name">
-			</div>
+			
+			
+			
+			
+			
+			
+		
+			
+			
+			
+			
+			
+			
 			<div class="form-group">
 				<label>자기소개</label>
 				<textarea class="form-control" id="self_intro" name="self_intro"></textarea>
 			</div>
-			<div class="form-group">
-				<label>사업자등록증</label> <input type="text" class="form-control"
-					id="cmp_reg_image" name="cmp_reg_image">
-				<button class="form-control">미리보기</button>
-				<button class="form-control">등록</button>
-			</div>
-			<div class="form-group">
-				<label>사업자등록증</label> <input type="text" class="form-control"
-					id="cmp_reg_image" name="cmp_reg_image">
-				<button class="form-control">미리보기</button>
-				<button class="form-control">파일업로드</button>
-			</div>
+			
+			
 		</form>
 
 
@@ -277,7 +322,7 @@ label {
    						$(this).val(input.replace(/[^0-9]/g,"").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
    					}else if(name == 'cmp_reg_no'){//사업자번호
    						$(this).val(input.replace(/[^0-9]/g,"").replace(/([0-9]{3})([0-9]{2})([0-9]+)?/,"$1-$2-$3").replace("--","-"));
-   					}else if(name == 'reg_no'){
+   					}else if(name == 'reg_no1'){
 	   					var str1 = input.substring(0,input.length);
 	   					var str2 = input.substring(7,input.length);
    						if(input.length==6){
@@ -287,8 +332,9 @@ label {
    						}
    					} //주민번호 */
    				});
-   				$('#reg_no').change(function(){
+   				$('#reg_no1').change(function(){
    					var str = $(this).val();
+   					$('#reg_no').val(str);
    					var str2 = str.substring(0,8);
    					var sex = str.substring(7,8);
    					var birth = str.substring(0,2);
@@ -309,13 +355,79 @@ label {
    						
    				});
    				
-   				$('#mil_yn').change(function(){
+   				$('.yn').change(function(){
    					var mil = $('#mil_yn').val();
-   					if(mil=='N'){
+   				 	var mil_type = $('#mil_type').val();
+   					var kosa = $('#kosa_reg_yn').val();
+   					if(mil=='N'||mil_type =="미필"){
    						$('.mil').prop('disabled', true);
+   						$('.mil').val('');
+   					}else{
+   						$('.mil').prop('disabled', false);
+   					}
+   					if(kosa=='N'){
+   						$('.kosa').prop('disabled', true);
+   						$('.kosa').val('');
+   					}else{
+   						$('.kosa').prop('disabled', false);
+   					}
+   						
+   					
+   					
+   				});
+   				
+   				$('.endDate').change(function(){
+   					var mil_startdate = $('#mil_startdate').val();
+   					var mil_enddate = $('#mil_enddate').val();
+   					var mil_startdateArr = mil_startdate.split('/');
+   					var mil_enddateArr = mil_enddate.split('/');
+   					var join_day = $('#join_day').val();
+   					var retire_day = $('#retire_day').val();
+   					var join_dayArr = join_day.split('/');
+   					var retire_dayArr = retire_day.split('/');
+   					
+   					var mil_end_compare = new Date(mil_enddateArr[2], parseInt(mil_enddateArr[0])-1, mil_enddateArr[1]);
+					var mil_start_compare = new Date(mil_startdateArr[2], parseInt(mil_startdateArr[0])-1, mil_startdateArr[1]);   					
+   					
+					var join_day_compare = new Date(join_dayArr[2], parseInt(join_dayArr[0])-1, join_dayArr[1] );
+					var retire_day_compare = new Date(retire_dayArr[2], parseInt(retire_dayArr[0])-1, retire_dayArr[1] );
+   					
+   					if(mil_start_compare > mil_end_compare){
+   						alert('입영날짜를 확인해주세요!');
+   						$('#mil_enddate').val('');
+   					}
+   					
+   					if(join_day_compare > retire_day_compare){
+   						alert('입사날짜를 확인해주세요!');
+   						$('#retire_day').val('');
    					}
    				});
    				
+   				$('#search').click(function(){
+   					new daum.Postcode({
+   			            oncomplete: function(data) { //선택시 입력값 세팅
+   			            	$('#zip').val(data.zonecode);
+   			            	$('#addr1').val(data.address); // 주소 넣기
+   			                $('#addr2').focus(); //상세입력 포커싱
+   			            }
+   			        }).open();
+   				});
+   				
+   				$('#salary').keyup(function(){
+   					
+   					var x = $('#salary').val();
+   					x = x.replace(/,/gi, '');
+   				    
+   					var regexp = /^[0-9]*$/;
+
+   					if(!regexp.test(x)){ 
+   						$('#salary').val(""); 
+   						alert("숫자만 입력 가능합니다.");
+   					} else {
+   						x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");			
+   						$('#salary').val(x);
+   					}
+   				});
    			})
    			
    			function setting (){
@@ -323,9 +435,11 @@ label {
    			 		$('#${i.name}').append('<option>${i.note}</option>');
    				</c:forEach>
    			}
-   			/* function dis() {
-   					$('#sabun').css({'background' : 'black'});
-   			} */
+   			$(function(){
+   				$('.datepicker').datepicker({
+   				});
+   			});
+   			
    			
    			
 		</script>
