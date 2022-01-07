@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.col-lg-4 {
-		color : white;
+		color : black;
 	}
 	.link-dark {
-		color : white;
+		color : black;
 	}
 </style>
 </head>

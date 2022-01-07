@@ -34,20 +34,14 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style type="text/css">
-	body {
-		
-	}
+	
 	
 	.navbar-nav {
 		float: right !important;
 		margin: 0;
 	}
 	
-	label {
-		width: 100px;
-		text-align: center;
-		color: white;
-	}
+
 	
 	#h2 {
 		width: 300px;
@@ -67,14 +61,14 @@
 		width:200px;
 	}
 	.section input{
-		width:100px;
+		width:100px;   
 	}
 </style>
 
 
 
 </head>
-<body style="background-color: black;">
+<body>
 	<%@include file="include/header.jsp"%>
 	<div class="container">
 		
@@ -117,9 +111,9 @@
 						disabled="disabled" id="sabun" name="sabun">
 				</div>
 				<div class="form-group">
-				<label>*아이디</label> <input type="text"
-					class="form-control duplicate" id="id" name="id"
-					required="required">
+					<label>*아이디</label> <input type="text"
+						class="form-control duplicate" id="id" name="id"
+						required="required">
 				</div>
 				<div class="form-group">
 					<label>전화번호</label> <input type="text" class="form-control hyphen"

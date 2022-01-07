@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-   <link href="css/styles.css" rel="stylesheet" />
+  		<link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top" >
         <!-- Navigation-->
@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="masthead-heading text-uppercase">인사관리 시스템</div>
                 <div class="masthead-subheading">인사정보를 입력하겠습니다 &nbsp; <a class="btn btn-primary btn-xl text-uppercase" href="regist">입력</a></div> 
-                <div class="masthead-subheading">인사정보를 조회하겠습니다 &nbsp; <a class="btn btn-primary btn-xl text-uppercase" href="#services">조회</a></div>
+                <div class="masthead-subheading">인사정보를 조회하겠습니다 &nbsp; <a class="btn btn-primary btn-xl text-uppercase" href="list">조회</a></div>
             </div>
    		</header>
         
