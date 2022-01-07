@@ -19,10 +19,88 @@
 			#{dept_code, jdbcType=VARCHAR},  #{join_gbn_code, jdbcType=VARCHAR},  #{id},  #{pwd},  #{salary, jdbcType=VARCHAR},  #{kosa_reg_yn, jdbcType=VARCHAR},  #{kosa_class_code, jdbcType=VARCHAR},  #{mil_yn, jdbcType=VARCHAR},  
 			#{mil_level, jdbcType=VARCHAR},  #{mil_type, jdbcType=VARCHAR},  #{mil_startdate, jdbcType=VARCHAR},  #{mil_enddate, jdbcType=VARCHAR},  #{job_type, jdbcType=VARCHAR},  #{gart_level, jdbcType=VARCHAR},  #{self_intro, jdbcType=VARCHAR},  
 			#{crm_name, jdbcType=VARCHAR},  #{profile, jdbcType=VARCHAR}
-			
 			)
 	</update>
+	
+	<select id="search" resultType="int" >
+		select count(*) from insa;
+	</select>
+	
+	<delete id="deleteUser" parameterType="java.util.List" >
+		delete from insa
+		<where>
+			<foreach collection="list" item ="sabun" open="" close="" separator ="OR">
+				 sabun = #{sabun}
+			</foreach>
+		</where>
+	</delete>
+	
+	<select id = "selectInsa" parameterType="com.pino.ys.dto.boardDto" resultType="com.pino.ys.dto.insertDto">
+		
+		<![CDATA[
+    		select * from insa where 1=1 
+    	]]>
+    	
+    	
+			<if test="sabun !=''">
+    			<![CDATA[
+					and sabun = #{sabun}
+    			]]>
+    		</if>
 
+    		<if test='name !=""'>
+    			<![CDATA[
+					and name = #{name}					
+    			]]>
+    		</if>
+    	
+   
+    		<if test='put_yn !=""'>
+    			<![CDATA[
+					and put_yn = #{put_yn}
+    			]]>
+    		</if>
+    	
+    	
+    		<if test='job_type !=""'>
+    			<![CDATA[
+					and job_type =#{job_type}			
+    			]]>
+    		</if>
+    	
+    	
+    		<if test='join_gbn_code != ""'>
+    			<![CDATA[
+					and join_gbn_code = #{join_gbn_code}
+    			]]>
+    		</if>
+    	
+    	
+    		<if test='pos_gbn_code != ""'>
+    			<![CDATA[
+					and pos_gbn_code = #{pos_gbn_code}
+    			]]>
+    		</if>
+    	
+    	
+    		<if test='join_day !=""'>		
+    			<![CDATA[
+					and join_day = #{join_day}					
+    			]]>
+    		</if>
+    		
+    		
+    		<if test='retire_day !=""'>
+	    		<![CDATA[
+						and retire_day = #{retire_day}
+	    			]]>
+			</if>
+
+	</select>
+	
+	
+	
+	
 
 </mapper>
 

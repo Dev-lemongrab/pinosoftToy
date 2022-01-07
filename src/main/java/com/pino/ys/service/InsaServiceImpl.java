@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pino.ys.dao.InsaDao;
+import com.pino.ys.dto.boardDto;
 import com.pino.ys.dto.insertDto;
 import com.pino.ys.dto.setDto;
 
@@ -28,4 +29,18 @@ public class InsaServiceImpl implements InsaService {
 	public void input(insertDto dto) {
 		insaDao.input(dto);
 	}
+
+	@Override
+	public ArrayList<insertDto> selectInsa(boardDto bDto) {
+		return insaDao.selectInsa(bDto);
+	}
+
+	@Override
+	public int deleteUser(ArrayList<String> delArr) {
+		return insaDao.deleteUser(delArr);
+		
+	}
+
+
+
 }

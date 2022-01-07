@@ -17,10 +17,10 @@
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style = "float: inherit;">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" style = "float: right;">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/regist">Input</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Search</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="/list">Search</a></li> 
                     
                     </ul>
                 </div>
