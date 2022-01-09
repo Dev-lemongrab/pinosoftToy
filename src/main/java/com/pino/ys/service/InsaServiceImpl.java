@@ -1,6 +1,7 @@
 package com.pino.ys.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,14 @@ public class InsaServiceImpl implements InsaService {
 		return insaDao.deleteUser(delArr);
 		
 	}
+
+	@Override
+	public int countBoard(boardDto bDto) {
+		return insaDao.countBoard(bDto);
+	}
+
+
+	
 
 
 

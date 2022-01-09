@@ -22,9 +22,61 @@
 			)
 	</update>
 	
-	<select id="search" resultType="int" >
-		select count(*) from insa;
+	
+	<select id="countBoard" parameterType="com.pino.ys.dto.boardDto" resultType="int">
+		
+		<![CDATA[
+			select count(*) from insa where 1=1
+		]]>
+										<if test='sabun != ""'>
+							    			<![CDATA[
+												and sabun = #{sabun}
+							    			]]>
+							    		</if>
+							    		<if test='name !=""'>
+							    			<![CDATA[
+												and name = #{name}					
+							    			]]>
+    									</if>
+							    		<if test='put_yn !=""'>
+							    			<![CDATA[
+												and put_yn = #{put_yn}
+							    			]]>
+							    		</if>
+    	
+							    	
+							    		<if test='job_type !=""'>
+							    			<![CDATA[
+												and job_type =#{job_type}			
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='join_gbn_code != ""'>
+							    			<![CDATA[
+												and join_gbn_code = #{join_gbn_code}
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='pos_gbn_code != ""'>
+							    			<![CDATA[
+												and pos_gbn_code = #{pos_gbn_code}
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='join_day !="" and retire_day != ""'>		
+							    			<![CDATA[
+												and join_day >= #{join_day} and retire_day <= #{retire_day}		
+							    			]]>
+							    		</if>
+							    		
+	
+	
 	</select>
+	<!-- 검색 선택된 것의 갯수만 세어야한다... -->
+	
 	
 	<delete id="deleteUser" parameterType="java.util.List" >
 		delete from insa
@@ -35,73 +87,73 @@
 		</where>
 	</delete>
 	
+
+	
+	
+	
+	
 	<select id = "selectInsa" parameterType="com.pino.ys.dto.boardDto" resultType="com.pino.ys.dto.insertDto">
 		
 		<![CDATA[
-    		select * from insa where 1=1 
+    		select b.* from(
+    						select a.* from (
+    										select rownum rn, insa.* from insa 
+    										where 1=1 
     	]]>
+										<if test='sabun != ""'>
+							    			<![CDATA[
+												and sabun = #{sabun}
+							    			]]>
+							    		</if>
+							    		<if test='name !=""'>
+							    			<![CDATA[
+												and name = #{name}					
+							    			]]>
+    									</if>
+							    		<if test='put_yn !=""'>
+							    			<![CDATA[
+												and put_yn = #{put_yn}
+							    			]]>
+							    		</if>
     	
+							    	
+							    		<if test='job_type !=""'>
+							    			<![CDATA[
+												and job_type =#{job_type}			
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='join_gbn_code != ""'>
+							    			<![CDATA[
+												and join_gbn_code = #{join_gbn_code}
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='pos_gbn_code != ""'>
+							    			<![CDATA[
+												and pos_gbn_code = #{pos_gbn_code}
+							    			]]>
+							    		</if>
+							    	
+							    	
+							    		<if test='join_day !="" and retire_day != ""'>		
+							    			<![CDATA[
+												and join_day >= #{join_day} and retire_day <= #{retire_day}		
+							    			]]>
+							    		</if>
+						
+							<![CDATA[
+			  										) a
+    						where rn between #{start} and #{end}
+    						)b 
+    						]]>  
     	
-			<if test="sabun !=''">
-    			<![CDATA[
-					and sabun = #{sabun}
-    			]]>
-    		</if>
-
-    		<if test='name !=""'>
-    			<![CDATA[
-					and name = #{name}					
-    			]]>
-    		</if>
-    	
-   
-    		<if test='put_yn !=""'>
-    			<![CDATA[
-					and put_yn = #{put_yn}
-    			]]>
-    		</if>
-    	
-    	
-    		<if test='job_type !=""'>
-    			<![CDATA[
-					and job_type =#{job_type}			
-    			]]>
-    		</if>
-    	
-    	
-    		<if test='join_gbn_code != ""'>
-    			<![CDATA[
-					and join_gbn_code = #{join_gbn_code}
-    			]]>
-    		</if>
-    	
-    	
-    		<if test='pos_gbn_code != ""'>
-    			<![CDATA[
-					and pos_gbn_code = #{pos_gbn_code}
-    			]]>
-    		</if>
-    	
-    	
-    		<if test='join_day !=""'>		
-    			<![CDATA[
-					and join_day = #{join_day}					
-    			]]>
-    		</if>
-    		
-    		
-    		<if test='retire_day !=""'>
-	    		<![CDATA[
-						and retire_day = #{retire_day}
-	    			]]>
-			</if>
-
 	</select>
 	
 	
 	
-	
-
 </mapper>
 
 	

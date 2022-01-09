@@ -1,9 +1,10 @@
 package com.pino.ys.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Service;
+
 
 import com.pino.ys.dto.boardDto;
 import com.pino.ys.dto.insertDto;
@@ -22,4 +23,8 @@ public interface InsaDao {
 	public ArrayList<insertDto> selectInsa(boardDto bDto);
 	
 	public int deleteUser(ArrayList<String> delArr);
+	
+	public int countBoard(boardDto bDto);
+	
+	
 }

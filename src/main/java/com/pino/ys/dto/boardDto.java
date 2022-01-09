@@ -21,7 +21,7 @@ public class boardDto {
 		
 	}
 	
-	public boardDto(int total, int nowPage, int cntPerPage) {
+	public void pagingSet(int total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
@@ -39,7 +39,7 @@ public class boardDto {
 	// 시작, 끝 페이지 계산
 	public void calcStartEndPage(int nowPage, int cntPage) {
 			
-		setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
+			setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
 			
 			if (getLastPage() < getEndPage()) {
 				setEndPage(getLastPage());
@@ -52,7 +52,7 @@ public class boardDto {
 	// DB 쿼리에서 사용할 start, end값 계산
 	public void calcStartEnd(int nowPage, int cntPerPage) {
 			
-			setEnd(nowPage * cntPerPage);
+			setEnd(nowPage * cntPerPage);//현재페이지가 now페이지 
 			setStart(getEnd() - cntPerPage + 1);
 	}
 	

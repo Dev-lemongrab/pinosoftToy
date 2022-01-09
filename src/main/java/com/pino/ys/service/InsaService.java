@@ -1,6 +1,7 @@
 package com.pino.ys.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pino.ys.dto.boardDto;
 import com.pino.ys.dto.insertDto;
@@ -17,4 +18,8 @@ public interface InsaService {
 	public ArrayList<insertDto> selectInsa(boardDto bDto);
 	
 	public int deleteUser(ArrayList<String> delArr);
+	
+	public int countBoard(boardDto bDto);
+	
+	
 }
