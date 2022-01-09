@@ -248,7 +248,7 @@
 					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" style="margin-right:57px">
 				</div>
 				<div class="form-group">
-					<button class="form-control button">미리보기</button>
+					<button class="form-control button">다운</button>
 					<button class="form-control button">파일업로드</button>
 				</div>
 			</div>
