@@ -43,9 +43,10 @@
 	
 
 	.container{
-		margin-left: 50px;
+		margin-left: 280px;
 		margin-right: 50px;
 		width:1320px;
+	
 		
 	}
 	#h2 {
@@ -90,7 +91,7 @@
 </head>
 <body>
 	<%@include file="include/header.jsp"%>
-	<div class="container" style="height: 700px;">
+	<div class="container" style="height: 735px;">
 		
 		<form class="form-inline" action="/regist/input" method="post">
 			<div>
@@ -106,16 +107,16 @@
 				<!--사진올리기  -->
 				<div class="grid" style="text-align: center;">
 					<div class="form-group">
-						<input type="image" class="" id="cmp_reg_image" name="cmp_reg_image" style ="width:165px; height:193px">
+						<input type="image" class="" id="faceImg" name="faceImg" style ="width:165px; height:193px" src="assets/upload/basic.jpg">
 					</div>
 					<div class="form-group">
-						<input type="button" class="form-control" id="faceImg" name="faceImg" value="사진올리기">
+						<input type="button" class="form-control" id="profile" name="profile" value="사진올리기">
 					</div>
 					<div class="form-group">
 						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option></option></select>
 					</div>
 					<div class="form-group">
-						<label>군별</label> <select class="form-control mil yn" id="mil_type" name="mil_type"><option></option></select>
+						<label>군별</label> <select class="form-control yn" id="mil_type" name="mil_type"><option></option></select>
 					</div>
 					<div class="form-group">
 						<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn" name="kosa_reg_yn"><option></option></select>
@@ -143,10 +144,10 @@
 						<label>주소</label> <input type="text" class="form-control" id="zip" name="zip" placeholder="우편번호" style="width:80px !important;"> &nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="form-group">
-						<button class="form-control" id ="search" style="width:76px !important; margin:-15px; font-size:10px;">주소검색</button>
+						<input type ="button" class="form-control" id ="search" style="width:76px !important; margin:-15px; font-size:10px;"value="주소검색">
 					</div>
 					<div class="form-group">
-						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="position"><option></option></select>
+						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="pos_gbn_code"><option></option></select>
 					</div>
 					<div class="form-group">
 						<label>등급</label> <select class="form-control" id="gart_level" name="gart_level"><option></option></select>

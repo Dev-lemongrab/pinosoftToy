@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+	.row{
+		margin-top:23px;
+		
+	}
 	.col-lg-4 {
 		color : black;
 	}
@@ -16,7 +20,7 @@
 		
 		width: 100%;
    		 background: antiquewhite;
-  		  height: 79px;
+  		  height: 100px;
 	}
 </style>
 </head>

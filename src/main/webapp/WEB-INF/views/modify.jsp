@@ -43,7 +43,7 @@
 	
 
 	.container{
-		margin-left: 50px;
+		margin-left: 280px;
 		margin-right: 50px;
 		width:1320px;
 		
@@ -92,13 +92,13 @@
 	<%@include file="include/header.jsp"%>
 	<div class="container" style="height: 700px;">
 		
-		<form class="form-inline" action="/regist/input" method="post">
+		<form class="form-inline" action="/modify" method="post">
 			<div>
 				<label id="h2" style="padding-bottom: 30px"><h2>직원상세정보</h2></label>
 				<div class="form-group"  style="float:right; padding-top:20px;" >
-						<input type="submit" value="등록" class="form-control rightBut" onclick="confirm('등록하시겠습니까?')">
+						<input type="submit" value="수정" class="form-control rightBut" onclick="confirm('수정 하시겠습니까?')">
 						<input type="submit" value="전화면" onclick="history.back()" class="form-control rightBut"> 
-						<input type="reset" value="초기화" class="form-control rightBut">
+						
 				</div>
 			</div>
 			<!-- 첫번째 grid -->
@@ -106,95 +106,96 @@
 				<!--사진올리기  -->
 				<div class="grid" style="text-align: center;">
 					<div class="form-group">
-						<input type="image" class="" id="cmp_reg_image" name="cmp_reg_image" style ="width:165px; height:193px">
+						<input type="image" class="" id="faceImg" name="faceImg"   style ="width:165px; height:193px " src="assets/upload/basic.jpg">
 					</div>
 					<div class="form-group">
-						<input type="button" class="form-control" id="faceImg" name="faceImg" value="사진올리기">
+						<input type="file" id="profile" name="profile" class="form-control"value="사진올리기">
 					</div>
 					<div class="form-group">
-						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option></option></select>
+						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option>${One.join_gbn_code} </option></select>
 					</div>
 					<div class="form-group">
-						<label>군별</label> <select class="form-control mil yn" id="mil_type" name="mil_type"><option></option></select>
+						<label>군별</label> <select class="form-control yn" id="mil_type" name="mil_type"><option>${One.mil_type }</option></select>
 					</div>
 					<div class="form-group">
-						<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn" name="kosa_reg_yn"><option></option></select>
+						<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn" name="kosa_reg_yn"><option>${One.kosa_reg_yn }</option></select>
 					</div>
 					<div class="form-group">
-						<label>사업자번호</label> <input type="text" class="form-control hyphen" id="cmp_reg_no" name="cmp_reg_no">
+						<label>사업자번호</label> <input type="text" class="form-control hyphen" id="cmp_reg_no" name="cmp_reg_no" value="${One.cmp_reg_no }" >
 					</div>	
 				</div>
 			
 			<!-- 두번째 grid -->	
 				<div class="grid" style="width:260px">
 					<div class="form-group">
-						<label>사번</label> <input type="text" class="form-control" disabled="disabled" id="sabun" name="sabun">
+						<label>사번</label> <input type="text" class="form-control" disabled="disabled" id="sabun" name="sabunDis" value="${One.sabun }">
+						<input type="hidden" name="sabun" value="${One.sabun}">
 					</div>
 					<div class="form-group">
-						<label>*아이디</label> <input type="text" class="form-control duplicate" id="id" name="id" required="required">
+						<label>*아이디</label> <input type="text" class="form-control duplicate" id="id" name="id" required="required" value=" ${One.id }">
 					</div>
 					<div class="form-group">
-						<label>전화번호</label> <input type="text" class="form-control hyphen" id="phone" name="phone">
+						<label>전화번호</label> <input type="text" class="form-control hyphen" id="phone" name="phone" value=" ${One. phone}">
 					</div>
 					<div class="form-group">
-						<label>연령</label> <input type="text" class="form-control" id="years" name="years">
+						<label>연령</label> <input type="text" class="form-control" id="years" name="years" value="${One. years}">
 					</div>
 					<div class="form-group">
-						<label>주소</label> <input type="text" class="form-control" id="zip" name="zip" placeholder="우편번호" style="width:80px !important;"> &nbsp;&nbsp;&nbsp;
+						<label>주소</label> <input type="text" class="form-control" id="zip" name="zip" placeholder="우편번호" value="${One.zip}"style="width:80px !important;" > &nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="form-group">
-						<button class="form-control" id ="search" style="width:76px !important; margin:-15px; font-size:10px;">주소검색</button>
+						<input type ="button" class="form-control" id ="search" style="width:76px !important; margin:-15px; font-size:10px;" value="주소검색">
 					</div>
 					<div class="form-group">
-						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="position"><option></option></select>
+						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="pos_gbn_code"><option>${One.pos_gbn_code}</option></select>
 					</div>
 					<div class="form-group">
-						<label>등급</label> <select class="form-control" id="gart_level" name="gart_level"><option></option></select>
+						<label>등급</label> <select class="form-control" id="gart_level" name="gart_level"><option>${One.gart_level}</option></select>
 					</div>
 					<div class="form-group">
-						<label>계급</label> <select class="form-control mil" id="mil_level" name="mil_level"><option></option></select>
+						<label>계급</label> <select class="form-control mil" id="mil_level" name="mil_level"><option>${One.mil_level}</option></select>
 					</div>
 					<div class="form-group">
-						<label>KOSA등급</label> <select class="form-control kosa" id="kosa_class_code" name="kosa_class_code"><option></option></select>
+						<label>KOSA등급</label> <select class="form-control kosa" id="kosa_class_code" name="kosa_class_code"><option>${One.kosa_class_code}</option></select>
 					</div>
 					<div class="form-group">
-						<label>업체명</label> <input type="text" class="form-control" id="crm_name" name="crm_name">
+						<label>업체명</label> <input type="text" class="form-control" id="crm_name" name="crm_name" value="${One.crm_name}">
 					</div>
 				</div>
 				
 			<!-- 세번째 grid -->
 				<div class ="grid" style="width: 316px;">
 					<div class="form-group">
-						<label>*한글성명</label> <input type="text" class="form-control validate" id="name" name="name" required="required" />
+						<label>*한글성명</label> <input type="text" class="form-control validate" id="name" name="name" required="required" value="${One.name}" />
 					</div>
 					<div class="form-group">
-						<label>*패스워드</label> <input type="password" class="form-control" id="pwd" name="pwd" required="required">
+						<label>*패스워드</label> <input type="password" class="form-control" id="pwd" name="pwd" required="required" value="${One.pwd}">
 					</div>
 					<div class="form-group">
-						<label>*핸드폰 번호</label> <input type="text" class="form-control hyphen" id="hp" name="hp" required="required">
+						<label>*핸드폰 번호</label> <input type="text" class="form-control hyphen" id="hp" name="hp" required="required" value="${One.hp}">
 					</div>
 					<div class="form-group" >
-					<label style="width:48px">*이메일</label> <input type="text" class="form-control" id="email1" name="email1" required="required" style="width:120px !important">
-						&nbsp;&nbsp; <select class="form-control" id="email" name="email" style="width: fit-content !important;"><option></option></select>
+					<label style="width:48px">*이메일</label> <input type="text" class="form-control" id="email1" name="email1" value="${email1 }"required="required" style="width:120px !important">
+						&nbsp;&nbsp; <select class="form-control" id="email" name="email" style="width: fit-content !important;"><option>${One.email}</option></select>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" style="width:307px !important">
+						<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" value="${one.addr1}" style="width:307px !important">
 					</div>
 					<div class="form-group">
-						<label>부서</label> <select class="form-control" id="dept_code" name="dept_code"><option></option></select>
+						<label>부서</label> <select class="form-control" id="dept_code" name="dept_code"><option>${One.dept_code}</option></select>
 					</div>
 					<div class="form-group">
-						<label>투입여부</label> <select class="form-control" id="put_yn" name="put_yn"><option></option></select>
+						<label>투입여부</label> <select class="form-control" id="put_yn" name="put_yn"><option>${One.put_yn}</option></select>
 					</div>
 					<div class="form-group">
-						<label>입영일자</label> <input type="text" class="form-control mil datepicker" id="mil_startdate" name="mil_startdate">
+						<label>입영일자</label> <input type="text" class="form-control mil datepicker" id="mil_startdate" name="mil_startdate" value="${One.mil_startdate} ">
 					</div>
 					<div class="form-group">
-						<label>입사일자</label> <input type="text" class="form-control datepicker" id="join_day" name="join_day">
+						<label>입사일자</label> <input type="text" class="form-control datepicker" id="join_day" name="join_day" value="${One.join_day}">
 					</div>
 					<!-- id, name수정필요 -->
 					<div class="form-group">
-						<label>사업자등록증</label> <input type="text" class="form-control" id="cmp_reg_image" name="cmp_reg_image">
+						<label>사업자등록증</label> <input type="text" class="form-control" id="cmp_reg_image" name="cmp_reg_image" value="${One.cmp_reg_image }">
 					</div>
 					
 				</div>
@@ -203,35 +204,35 @@
 							
 			<div class="grid" style="text-align:left;width:391px;">
 				<div class="form-group">
-					<label>영문성명</label> <input type="text" class="form-control validate" id="eng_name" name="eng_name" />
+					<label>영문성명</label> <input type="text" class="form-control validate" id="eng_name" name="eng_name" value="${One.eng_name }"/>
 				</div>
 				<div class="form-group">
 					<label>*패스워드확인</label> <input type="password" class="form-control pwdChk" id="pwChk" name="pwChk" required="required">
 				</div>
 				<div class="form-group">
-					<label>*주민번호</label> <input type="text" class="form-control hyphen" id="reg_no1" name="reg_no1" required="required" maxlength="14">
+					<label>*주민번호</label> <input type="text" class="form-control hyphen" id="reg_no1" name="reg_no1" required="required" maxlength="14" value="${One.reg_no }">
 										  <input type="hidden" id="reg_no" name="reg_no">
 				</div>
 				<div class="form-group">
-					<label>직종체크</label> <select class="form-control" id="job_type" name="job_type" style="width:90px !important"><option></option></select>
+					<label>직종체크</label> <select class="form-control" id="job_type" name="job_type" style="width:90px !important"><option>${One.job_type }</option></select>
 				</div>
 				<div class="form-group">
-					<label style="width:60px">성별</label> <select class="form-control" id="sex" name="sex" style="width:90px !important"><option></option></select>
+					<label style="width:60px">성별</label> <select class="form-control" id="sex" name="sex" style="width:90px !important"><option>${One.sex }</option></select>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="addr2" name="addr2" placeholder="세부주소" style="width:344px !important">
+					<input type="text" class="form-control" id="addr2" name="addr2" placeholder="세부주소" value="${One.addr2 }" style="width:344px !important">
 				</div>
 				<div class="form-group">
-					<label>연봉(만원)</label> <input type="text" class="form-control" id="salary" name="salary" style="text-align:right">
+					<label>연봉(만원)</label> <input type="text" class="form-control" id="salary" name="salary" value="${One.salary }" style="text-align:right">
 				</div>
 				<div class="form-group">
-					<label>군필여부</label> <select class="form-control yn" id="mil_yn" name="mil_yn"><option></option></select>
+					<label>군필여부</label> <select class="form-control yn" id="mil_yn" name="mil_yn"><option>${one.mil_yn }</option></select>
 				</div>
 				<div class="form-group">
-				<label>전역일자</label> <input type="text" class="form-control mil datepicker endDate" id="mil_enddate" name="mil_enddate">
+				<label>전역일자</label> <input type="text" class="form-control mil datepicker endDate" id="mil_enddate" name="mil_enddate" value="${One.mil_enddate }">
 				</div>
 				<div class="form-group">
-					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate" id="retire_day" name="retire_day">
+					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate" id="retire_day" name="retire_day"value="${retire_day }">
 				</div>
 				<div class = "form-group">
 					<button class="form-control button">미리보기</button>
@@ -242,10 +243,10 @@
 			<div class="grid" style="float: none; text-align: center; width :1221px" >
 				<div class="form-group">
 					<label style="width:104px">자기소개</label>
-					<textarea class="form-control" id="self_intro" name="self_intro" style="width:450px !important"></textarea>
+					<textarea class="form-control" id="self_intro" name="self_intro" ${One.self_intro } style="width:450px !important"></textarea>
 				</div>
 				<div class="form-group">
-					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" style="margin-right:57px">
+					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" value="${One.carrier }" style="margin-right:57px">
 				</div>
 				<div class="form-group">
 					<button class="form-control button">다운</button>
@@ -346,6 +347,7 @@
    					var mil = $('#mil_yn').val();
    				 	var mil_type = $('#mil_type').val();
    					var kosa = $('#kosa_reg_yn').val();
+   					
    					if(mil=='N'||mil_type =="미필"){
    						$('.mil').prop('disabled', true);
    						$('.mil').val('');

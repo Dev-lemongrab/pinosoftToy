@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pino.ys.dao.InsaDao;
 import com.pino.ys.dto.boardDto;
 import com.pino.ys.dto.insertDto;
 import com.pino.ys.service.InsaServiceImpl;
@@ -91,13 +92,48 @@ public class ListController {
 	@RequestMapping(value="/delete")
 	@ResponseBody
 	public int delete(String delArr) {
-		String[] deleteArr = delArr.split(",") ;
+		String[] deleteArr = delArr.split(",");
 		ArrayList<String> delList = new ArrayList<String>();
 		for(String s : deleteArr) {
-			delList.add(s);
+			delList.add(s.trim());
 		}
-		return insaServiceImpl.deleteUser(delList);
+		int del = insaServiceImpl.deleteUser(delList);
 		
+		return del;
+		
+	}
+	
+	@RequestMapping(value="/selectOne")
+	public ModelAndView selectOne(String sabun) {
+		insertDto selectOne = insaServiceImpl.selectOne(sabun);
+		
+		String emailArr[] = selectOne.getEmail().split("@");
+		
+		//이멜도메인
+		selectOne.setEmail("@"+emailArr[1]);
+		//이메일아이디
+		ModelAndView mov = new ModelAndView();
+		mov.addObject("email1", emailArr[0]);
+		mov.setViewName("modify");
+		mov.addObject("list", insaServiceImpl.setService());
+		mov.addObject("One", selectOne);
+		return mov;
+	}
+	
+	@RequestMapping("/modify")
+	public ModelAndView modify(insertDto dto, String email1) {
+		ModelAndView mov = new ModelAndView();
+		dto.setEmail(email1+dto.getEmail());//이메일 합쳐주기
+		insaServiceImpl.update(dto);
+		dto = insaServiceImpl.selectOne(dto.getSabun());
+		String emailArr[] = dto.getEmail().split("@");
+		dto.setEmail("@"+emailArr[1]);
+		mov.setViewName("modify");
+		mov.addObject("One", dto);
+		mov.addObject("email1", emailArr[0]);
+		mov.addObject("list", insaServiceImpl.setService());
+	
+		return mov;
 	}
 	
 }

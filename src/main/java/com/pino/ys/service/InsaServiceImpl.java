@@ -47,6 +47,16 @@ public class InsaServiceImpl implements InsaService {
 		return insaDao.countBoard(bDto);
 	}
 
+	@Override
+	public insertDto selectOne(String sabun) {
+		return insaDao.selectOne(sabun);
+	}
+
+	@Override
+	public void update(insertDto dto) {
+		insaDao.updateUser(dto);
+	}
+
 
 	
 

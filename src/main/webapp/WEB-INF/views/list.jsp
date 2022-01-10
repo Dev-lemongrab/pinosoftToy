@@ -54,7 +54,7 @@
 					<label>성명</label> <input type="text"class="form-control" id="name" name="name" value="${bDto.name}">
 					<label>입사구분</label><select class="form-control" id="join_gbn_code" name="join_gbn_code" ><option>${bDto.join_gbn_code}</option></select>
 					<label>투입여부</label><select class="form-control" id="put_yn" name="put_yn" ><option>${bDto.put_yn }</option></select>
-				</div>1
+				</div>
 				<div class="form-group">
 					<label>직위</label><select class="form-control" id="pos_gbn_code" name="pos_gbn_code"><option>${bDto.pos_gbn_code }</option></select>
 					<label>입사일자</label><input type = "text" class="form-control datepicker endDate" id="join_day" name="join_day" style="margin-left:8px;" value="${bDto.join_day}">
@@ -91,8 +91,8 @@
 			    <tbody>
 			   		<c:forEach var ="i" items="${contents}">
 				    	<tr>
-				    		<td><input type="checkbox" id="delChk" name="delChk"></td>
-				    		<td>${i.sabun }</td>
+				    		<td><input type="checkbox" id="delChk" name="delChk" value="${i.sabun}"></td>
+				    		<td><input type="button" id ="selectOneButton" onclick="selectOne('${i.sabun}')" value="${i.sabun}"></td>
 				    		<td>${i.name }</td>
 				    		<td>${i.reg_no }</td>
 				    		<td>${i.hp }</td>
@@ -164,6 +164,21 @@
 					</c:forEach>
 					
 				}
+				 function selectOne(e) {
+					var sabun = e;
+					var form = document.createElement("form");
+					var input = document.createElement("input");
+						input.setAttribute("type","hidden");
+						input.setAttribute("name","sabun");
+						input.setAttribute("value", sabun);
+					    form.setAttribute("method", "post");
+					    form.setAttribute("action", "/selectOne");
+					
+					form.appendChild(input);
+					document.body.appendChild(form);
+				    
+					form.submit();
+				} 
 				function deleteUser() {
 	   					
 						var deleteArr =[];
@@ -172,7 +187,7 @@
 						
 							deleteArr.push($(this).val());
 						});
-	   					if(deleteArr>0){
+	   					if(deleteArr.length>0){
 							confirm('삭제할 사번은'+deleteArr+' 입니다');
 	   					}else {
 	   						alert('삭제할 사원을 선택해주세요');

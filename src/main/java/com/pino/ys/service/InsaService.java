@@ -21,5 +21,7 @@ public interface InsaService {
 	
 	public int countBoard(boardDto bDto);
 	
+	public insertDto selectOne(String sabun);
 	
+	public void update(insertDto dto);
 }

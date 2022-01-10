@@ -26,5 +26,8 @@ public interface InsaDao {
 	
 	public int countBoard(boardDto bDto);
 	
+	public insertDto selectOne(String sabun);
+	
+	public void updateUser(insertDto dto);
 	
 }

@@ -38,7 +38,8 @@ public class RegistController {
 		return cnt;
 	}
 	@RequestMapping(value = "/regist/input")
-	public String input(insertDto dto) {
+	public String input(insertDto dto, String email1) {
+		dto.setEmail(email1+dto.getEmail());//이메일주소 합쳐주기
 		insaServiceImpl.input(dto);
 		return "redirect:/regist";
 	}
