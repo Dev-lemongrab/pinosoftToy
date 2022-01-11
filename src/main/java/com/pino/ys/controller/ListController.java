@@ -2,6 +2,7 @@ package com.pino.ys.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,9 +122,12 @@ public class ListController {
 	}
 	
 	@RequestMapping("/modify")
-	public ModelAndView modify(insertDto dto, String email1) {
+	public ModelAndView modify(insertDto dto, String email1, HttpServletRequest req) {
 		ModelAndView mov = new ModelAndView();
 		dto.setEmail(email1+dto.getEmail());//이메일 합쳐주기
+		String root=req.getSession().getServletContext().getRealPath("/"); 
+		String path=root+"\\upload\\";
+		dto.fileCheck(dto,path);
 		insaServiceImpl.update(dto);
 		dto = insaServiceImpl.selectOne(dto.getSabun());
 		String emailArr[] = dto.getEmail().split("@");

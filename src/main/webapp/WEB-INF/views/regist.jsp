@@ -12,26 +12,18 @@
         <meta name="author" content="" />-->
 <title>Pinosoft - 직원관리</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-	crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
-	rel="stylesheet" type="text/css" />
+<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 <link href="css/styles.css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style type="text/css">
 	
@@ -90,10 +82,13 @@
 
 </head>
 <body>
+
+ 
 	<%@include file="include/header.jsp"%>
+	
 	<div class="container" style="height: 735px;">
 		
-		<form class="form-inline" action="/regist/input" method="post">
+		<form class="form-inline" action="/regist/input" method="post" enctype="multipart/form-data">
 			<div>
 				<label id="h2" style="padding-bottom: 30px"><h2>직원상세정보</h2></label>
 				<div class="form-group"  style="float:right; padding-top:20px;" >
@@ -107,11 +102,12 @@
 				<!--사진올리기  -->
 				<div class="grid" style="text-align: center;">
 					<div class="form-group">
-						<input type="image" class="" id="faceImg" name="faceImg" style ="width:165px; height:193px" src="assets/upload/basic.jpg">
+						<img class="" id="profile_image" name="profile_image" style ="width:165px; height:193px" src="upload/profile.jpg" >
 					</div>
 					<div class="form-group">
-						<input type="button" class="form-control" id="profile" name="profile" value="사진올리기">
+						<input type="file" class="form-control" id="profile_image_file" name="profile_image_file" accept="image/*" onchange="loadFile(this)">
 					</div>
+				<!-- 사진올리기 -->
 					<div class="form-group">
 						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option></option></select>
 					</div>
@@ -193,7 +189,7 @@
 					<div class="form-group">
 						<label>입사일자</label> <input type="text" class="form-control datepicker" id="join_day" name="join_day">
 					</div>
-					<!-- id, name수정필요 -->
+					
 					<div class="form-group">
 						<label>사업자등록증</label> <input type="text" class="form-control" id="cmp_reg_image" name="cmp_reg_image">
 					</div>
@@ -235,8 +231,8 @@
 					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate" id="retire_day" name="retire_day">
 				</div>
 				<div class = "form-group">
-					<button class="form-control button">미리보기</button>
-					<button class="form-control button">등록</button>
+					<button type="button" class="form-control button" id="modal_show">미리보기</button>
+					<input type="file" class="form-control button" name="cmp_image_file" id="cmp_image_file" value="등록" onchange="cmpFile(this)">
 					
 				</div>
 			</div>
@@ -249,14 +245,59 @@
 					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" style="margin-right:57px">
 				</div>
 				<div class="form-group">
-					<button class="form-control button">미리보기</button>
-					<button class="form-control button">파일업로드</button>
+					<button type="button" class="form-control button" id="modal_show2">미리보기</button>
+					<input type ="file" name="carrier_image_file" id ="carrier_image_file" class="form-control button" value="등록" onchange="carrierFile(this)">	
 				</div>
 			</div>
 		</form>
-
 	</div>
+	
+	<!-- 이력서모달 -->
+	<div class="modal fade" id="carModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">이력서</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="margin-left:370px;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img" id="car_img" > 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 사업자등록증 모달 -->
+    <div class="modal fade" id="cmpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align: center;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">사업자등록증</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"style="margin-left:370px;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img" id="cmp_img" > 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+										
 	<script>
+	
+	
+
+				 
+				
    			$(()=>{
    				setting();
    				//dis();
@@ -295,6 +336,7 @@
    			            dataType : "json", 
    			            success : function(data) {
    			                if (data == 1) {
+   			                	$('#id').val("");
    			                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");			                    
       			            }else {
    			                    alert("사용가능한 아이디입니다.");
@@ -427,8 +469,37 @@
    				$('.datepicker').datepicker({
    				});
    			});
+   		 
    			
+   		 $(document).ready(function() {
+             $("#modal_show").click(function() {
+                 $("#cmpModal").modal("show");
+             });
+             $("#modal_show2").click(function() {
+                 $("#carModal").modal("show");
+             });
+  
+           
+         });
    			
+   			function loadFile(input) {
+   				var profile = input.files[0].name;
+   			   	document.getElementById("profile_image").value=profile;
+   			    var file = input.files[0];
+   			    document.getElementById("profile_image").src = URL.createObjectURL(file);
+   			};
+   			function cmpFile(input) {
+   			    let cmpfile = input.files[0].name;
+   			    document.getElementById("cmp_reg_image").value = cmpfile;
+   			    let file = input.files[0];
+   			    document.getElementById("cmp_img").src = URL.createObjectURL(file);
+   			};
+   			function carrierFile(input) {
+   			    let carrierfile = input.files[0].name;
+   			    document.getElementById("carrier").value = carrierfile;
+   			    let file = input.files[0];
+   			    document.getElementById("car_img").src = URL.createObjectURL(file);
+   			};
    			
 		</script>
 

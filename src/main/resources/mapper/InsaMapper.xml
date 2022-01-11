@@ -18,7 +18,7 @@
 			#{pos_gbn_code, jdbcType=VARCHAR}, #{cmp_reg_no, jdbcType=VARCHAR}, #{cmp_reg_image, jdbcType=VARCHAR},  #{sex, jdbcType=VARCHAR},  #{years, jdbcType=VARCHAR},  #{email},  #{zip, jdbcType=VARCHAR},  #{addr1, jdbcType=VARCHAR},  #{addr2, jdbcType=VARCHAR}, 
 			#{dept_code, jdbcType=VARCHAR},  #{join_gbn_code, jdbcType=VARCHAR},  #{id},  #{pwd},  #{salary, jdbcType=VARCHAR},  #{kosa_reg_yn, jdbcType=VARCHAR},  #{kosa_class_code, jdbcType=VARCHAR},  #{mil_yn, jdbcType=VARCHAR},  
 			#{mil_level, jdbcType=VARCHAR},  #{mil_type, jdbcType=VARCHAR},  #{mil_startdate, jdbcType=VARCHAR},  #{mil_enddate, jdbcType=VARCHAR},  #{job_type, jdbcType=VARCHAR},  #{gart_level, jdbcType=VARCHAR},  #{self_intro, jdbcType=VARCHAR},  
-			#{crm_name, jdbcType=VARCHAR},  #{profile, jdbcType=VARCHAR}
+			#{crm_name, jdbcType=VARCHAR},  #{profile_image, jdbcType=VARCHAR}
 			)
 	</update>
 	
@@ -69,7 +69,7 @@
 			  <if test="!gart_level.equals('#{gart_level}')"><![CDATA[gart_level= #{gart_level},]]></if>
 			  <if test="!self_intro.equals('#{self_intro}')"><![CDATA[self_intro= #{self_intro},]]></if>
 			  <if test="!crm_name.equals('#{crm_name}')"><![CDATA[crm_name= #{crm_name},]]></if>
-			  <if test="!profile.equals('#{profile}') || profile != null"><![CDATA[profile= #{profile},]]></if>
+			  <if test="!profile_image.equals('#{profile_image}') || profile_image != null"><![CDATA[profile_image= #{profile_image},]]></if>
 		   </trim>
 			where sabun=#{sabun}
 	</update>
