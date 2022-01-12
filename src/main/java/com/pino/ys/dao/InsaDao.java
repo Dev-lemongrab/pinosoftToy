@@ -30,4 +30,5 @@ public interface InsaDao {
 	
 	public void updateUser(insertDto dto);
 	
+	public insertDto selectImg(String sabun);
 }

@@ -13,7 +13,7 @@
 	<update id="input" parameterType="com.pino.ys.dto.insertDto">
 			
 			insert into insa values(
-			(select (max(sabun)+1) from insa),  #{join_day, jdbcType=VARCHAR}, #{retire_day, jdbcType=VARCHAR}, #{put_yn, jdbcType=VARCHAR}, 
+			(select (max(sabun)+1) from insa), #{join_day, jdbcType=VARCHAR}, #{retire_day, jdbcType=VARCHAR}, #{put_yn, jdbcType=VARCHAR}, 
 			#{name}, #{reg_no, jdbcType=VARCHAR}, #{eng_name}, #{phone, jdbcType=VARCHAR}, #{hp}, #{carrier, jdbcType=VARCHAR}, 
 			#{pos_gbn_code, jdbcType=VARCHAR}, #{cmp_reg_no, jdbcType=VARCHAR}, #{cmp_reg_image, jdbcType=VARCHAR},  #{sex, jdbcType=VARCHAR},  #{years, jdbcType=VARCHAR},  #{email},  #{zip, jdbcType=VARCHAR},  #{addr1, jdbcType=VARCHAR},  #{addr2, jdbcType=VARCHAR}, 
 			#{dept_code, jdbcType=VARCHAR},  #{join_gbn_code, jdbcType=VARCHAR},  #{id},  #{pwd},  #{salary, jdbcType=VARCHAR},  #{kosa_reg_yn, jdbcType=VARCHAR},  #{kosa_class_code, jdbcType=VARCHAR},  #{mil_yn, jdbcType=VARCHAR},  
@@ -46,10 +46,10 @@
 			  <if test="!eng_name.equals('#{eng_name}')"><![CDATA[eng_name = #{eng_name},]]></if>
 			  <if test="!phone.equals('#{phone}')"><![CDATA[phone = #{phone},]]></if>
 			  <if test="!hp.equals('#{hp}')"><![CDATA[hp = #{hp},]]></if>
-			  <if test="!carrier.equals('#{carrier}')"><![CDATA[carrier= #{carrier},]]></if>
+			  <if test="!carrier.equals('')"><![CDATA[carrier= #{carrier},]]></if>
 			  <if test="!pos_gbn_code.equals('#{pos_gbn_code}')"><![CDATA[pos_gbn_code= #{pos_gbn_code},]]></if>
 			  <if test="!cmp_reg_no.equals('#{cmp_reg_no}')"><![CDATA[cmp_reg_no= #{cmp_reg_no},]]></if>
-			  <if test="!cmp_reg_image.equals('#{cmp_reg_image}')"><![CDATA[cmp_reg_image= #{cmp_reg_image},]]></if>
+			  <if test="!cmp_reg_image.equals('')"><![CDATA[cmp_reg_image= #{cmp_reg_image},]]></if>
 			  <if test="!sex.equals('#{sex}')"><![CDATA[sex= #{sex},]]></if>
 			  <if test="!years.equals('#{years}')"><![CDATA[years= #{years},]]></if>
 			  <if test="!email.equals('#{email}')"><![CDATA[email= #{email},]]></if>
@@ -69,15 +69,20 @@
 			  <if test="!gart_level.equals('#{gart_level}')"><![CDATA[gart_level= #{gart_level},]]></if>
 			  <if test="!self_intro.equals('#{self_intro}')"><![CDATA[self_intro= #{self_intro},]]></if>
 			  <if test="!crm_name.equals('#{crm_name}')"><![CDATA[crm_name= #{crm_name},]]></if>
-			  <if test="!profile_image.equals('#{profile_image}') || profile_image != null"><![CDATA[profile_image= #{profile_image},]]></if>
+			  <if test="!(profile_image.equals(''))"><![CDATA[profile_image= #{profile_image},]]></if>
 		   </trim>
 			where sabun=#{sabun}
 	</update>
+	
+	<select id="selectImg" resultType="com.pino.ys.dto.insertDto">
+		select cmp_reg_image, carrier, profile_image from insa where sabun = #{sabun}
+	</select>
 	
 	
 	<select id = "selectOne" resultType="com.pino.ys.dto.insertDto">
 		select * from insa where sabun = #{sabun}
 	</select>
+	
 	<select id="countBoard" parameterType="com.pino.ys.dto.boardDto" resultType="int">
 		
 		<![CDATA[
@@ -132,9 +137,6 @@
 	
 	
 
-
-	
-	
 	
 	
 	<select id = "selectInsa" parameterType="com.pino.ys.dto.boardDto" resultType="com.pino.ys.dto.insertDto">

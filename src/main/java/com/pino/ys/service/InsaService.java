@@ -24,4 +24,6 @@ public interface InsaService {
 	public insertDto selectOne(String sabun);
 	
 	public void update(insertDto dto);
+	
+	public insertDto selectImg(String sabun);
 }

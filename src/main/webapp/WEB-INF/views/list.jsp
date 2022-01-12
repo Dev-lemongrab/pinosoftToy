@@ -45,7 +45,7 @@
 <body>
 	<%@ include file = "include/header.jsp"%>
 		<div class="container">
-			<form class="form-inline" action="/listView"method="post" >
+			<form class="form-inline" action="/listView" onkeydown="return captureReturnKey(event)" method="post" >
 				<div>
 					<h2 style="margin-bottom:40px;">직원리스트</h2>
 				</div>
@@ -61,8 +61,8 @@
 					<label>퇴사일자</label><input type ="text" class="form-control datepicker endDate" id="retire_day" name="retire_day" value="${bDto.retire_day}">							
 					<label>직종분류</label><select class="form-control" id="job_type" name="job_type"><option>${bDto.job_type}</option></select>				
 				</div>
-				<div class="form-group"  style="float:right; padding-top:20px;" >
-						<input type="submit" value="검색" class="form-control button" onclick="confirm('검색 하시겠습니까?')" style="color:blue; font-weight: bold;">
+				<div class="form-group"  style="float:right; padding-top:20px;">
+						<input type="submit" value="검색" class="form-control button" style="color:blue; font-weight: bold;">
 						<input type="reset" value="초기화" class="form-control button">
 						<input type="submit" value="이전" onclick="history.back()" class="form-control button">
 						<input type ="button" value="삭제" onclick="deleteUser()" class="form-control button" style="color:red; font-weight: bold;">
@@ -171,6 +171,9 @@
 						input.setAttribute("type","hidden");
 						input.setAttribute("name","sabun");
 						input.setAttribute("value", sabun);
+					
+						
+						
 					    form.setAttribute("method", "post");
 					    form.setAttribute("action", "/selectOne");
 					
@@ -209,7 +212,10 @@
 	   			            }
 	   			        });
 				}	
-	   			
+				 function captureReturnKey(e) { 
+					   if(e.keyCode==13 && e.srcElement.type != 'textarea') 
+					   return false; 
+				}
 				
 			
 			</script>

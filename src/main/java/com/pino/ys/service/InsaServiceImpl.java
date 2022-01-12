@@ -57,6 +57,11 @@ public class InsaServiceImpl implements InsaService {
 		insaDao.updateUser(dto);
 	}
 
+	@Override
+	public insertDto selectImg(String sabun) {
+		return insaDao.selectImg(sabun);
+	}
+
 
 	
 

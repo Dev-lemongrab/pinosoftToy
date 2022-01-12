@@ -32,7 +32,8 @@ public class insertDto {
 	private String dept_code;
 	private String join_gbn_code; 
 	private String id;
-	private String pwd; 
+	private String pwd;
+	private String pwChk;
 	private String salary;
 	private String kosa_reg_yn;
 	private String kosa_class_code;

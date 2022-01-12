@@ -33,6 +33,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+	<script type="text/javascript" src="/js/common.js"></script>
 <style type="text/css">
 	
 	
@@ -92,12 +93,12 @@
 	<%@include file="include/header.jsp"%>
 	<div class="container" style="height: 700px;">
 		
-		<form class="form-inline" action="/modify" method="post" enctype="multipart/form-data">
+		<form class="form-inline" action="/modify" method="post" onkeydown="return captureReturnKey(event)" enctype="multipart/form-data" style="width:1310px;">
 			<div>
 				<label id="h2" style="padding-bottom: 30px"><h2>직원상세정보</h2></label>
 				<div class="form-group"  style="float:right; padding-top:20px;" >
 						<input type="submit" value="수정" class="form-control rightBut" onclick="confirm('수정 하시겠습니까?')">
-						<input type="submit" value="전화면" onclick="history.back()" class="form-control rightBut"> 
+						<input type="button" value="전화면" onclick="location.href='/list'" class="form-control rightBut"> 
 						
 				</div>
 			</div>
@@ -113,30 +114,30 @@
 						<input type="file" id="profile_image_file" name="profile_image_file" class="form-control" accept="image/*" onchange="loadFile(this)">
 					</div>
 					<div class="form-group">
-						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option>${One.join_gbn_code} </option></select>
+						<label>입사구분</label> <select class="form-control" id="join_gbn_code" name="join_gbn_code"><option></option><option selected="selected">${One.join_gbn_code} </option></select>
 					</div>
 					<div class="form-group">
-						<label>군별</label> <select class="form-control yn" id="mil_type" name="mil_type"><option>${One.mil_type }</option></select>
+						<label>군별</label> <select class="form-control yn mil" id="mil_type" name="mil_type"><option></option><option selected="selected">${One.mil_type }</option></select>
 					</div>
 					<div class="form-group">
-						<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn" name="kosa_reg_yn"><option>${One.kosa_reg_yn }</option></select>
+						<label>KOSA등록</label> <select class="form-control yn" id="kosa_reg_yn" name="kosa_reg_yn"><option></option><option selected="selected">${One.kosa_reg_yn }</option></select>
 					</div>
 					<div class="form-group">
-						<label>사업자번호</label> <input type="text" class="form-control hyphen" id="cmp_reg_no" name="cmp_reg_no" value="${One.cmp_reg_no }" >
+						<label>사업자번호</label> <input type="text" class="form-control hyphen" id="cmp_reg_no" name="cmp_reg_no" value="${One.cmp_reg_no}" >
 					</div>	
 				</div>
 			
 			<!-- 두번째 grid -->	
 				<div class="grid" style="width:260px">
 					<div class="form-group">
-						<label>사번</label> <input type="text" class="form-control" disabled="disabled" id="sabun" name="sabunDis" value="${One.sabun }">
+						<label>사번</label> <input type="text" class="form-control" disabled="disabled" id="sabun" name="sabunDis" value="${One.sabun}">
 						<input type="hidden" name="sabun" value="${One.sabun}">
 					</div>
 					<div class="form-group">
-						<label>*아이디</label> <input type="text" class="form-control duplicate" id="id" name="id" required="required" value=" ${One.id }">
+						<label>*아이디</label> <input type="text" class="form-control duplicate" id="id" name="id" required="required" value="${One.id}">
 					</div>
 					<div class="form-group">
-						<label>전화번호</label> <input type="text" class="form-control hyphen" id="phone" name="phone" value=" ${One. phone}">
+						<label>전화번호</label> <input type="text" class="form-control hyphen" id="phone" name="phone" value="${One.phone}">
 					</div>
 					<div class="form-group">
 						<label>연령</label> <input type="text" class="form-control" id="years" name="years" value="${One. years}">
@@ -148,16 +149,16 @@
 						<input type ="button" class="form-control" id ="search" style="width:76px !important; margin:-15px; font-size:10px;" value="주소검색">
 					</div>
 					<div class="form-group">
-						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="pos_gbn_code"><option>${One.pos_gbn_code}</option></select>
+						<label>직위</label> <select class="form-control" id="pos_gbn_code" name="pos_gbn_code"><option></option><option selected="selected">${One.pos_gbn_code}</option></select>
 					</div>
 					<div class="form-group">
-						<label>등급</label> <select class="form-control" id="gart_level" name="gart_level"><option>${One.gart_level}</option></select>
+						<label>등급</label> <select class="form-control" id="gart_level" name="gart_level"><option></option><option selected="selected">${One.gart_level}</option></select>
 					</div>
 					<div class="form-group">
-						<label>계급</label> <select class="form-control mil" id="mil_level" name="mil_level"><option>${One.mil_level}</option></select>
+						<label>계급</label> <select class="form-control mil" id="mil_level" name="mil_level"><option></option><option selected="selected">${One.mil_level}</option></select>
 					</div>
 					<div class="form-group">
-						<label>KOSA등급</label> <select class="form-control kosa" id="kosa_class_code" name="kosa_class_code"><option>${One.kosa_class_code}</option></select>
+						<label>KOSA등급</label> <select class="form-control kosa" id="kosa_class_code" name="kosa_class_code"><option></option><option selected="selected">${One.kosa_class_code}</option></select>
 					</div>
 					<div class="form-group">
 						<label>업체명</label> <input type="text" class="form-control" id="crm_name" name="crm_name" value="${One.crm_name}">
@@ -165,7 +166,7 @@
 				</div>
 				
 			<!-- 세번째 grid -->
-				<div class ="grid" style="width: 316px;">
+				<div class ="grid" style="width: 331px;">
 					<div class="form-group">
 						<label>*한글성명</label> <input type="text" class="form-control validate" id="name" name="name" required="required" value="${One.name}" />
 					</div>
@@ -177,16 +178,16 @@
 					</div>
 					<div class="form-group" >
 					<label style="width:48px">*이메일</label> <input type="text" class="form-control" id="email1" name="email1" value="${email1 }"required="required" style="width:120px !important">
-						&nbsp;&nbsp; <select class="form-control" id="email" name="email" style="width: fit-content !important;"><option>${One.email}</option></select>
+						&nbsp;&nbsp; <select class="form-control" id="email" name="email" style="width: 141px !important;"><option></option><option selected="selected">${One.email}</option></select>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" value="${one.addr1}" style="width:307px !important">
+						<input type="text" class="form-control" id="addr1" name="addr1" placeholder="주소" value="${one.addr1}" style="width:328px !important">
 					</div>
 					<div class="form-group">
-						<label>부서</label> <select class="form-control" id="dept_code" name="dept_code"><option>${One.dept_code}</option></select>
+						<label>부서</label> <select class="form-control" id="dept_code" name="dept_code"><option></option><option selected="selected">${One.dept_code}</option></select>
 					</div>
 					<div class="form-group">
-						<label>투입여부</label> <select class="form-control" id="put_yn" name="put_yn"><option>${One.put_yn}</option></select>
+						<label>투입여부</label> <select class="form-control" id="put_yn" name="put_yn"><option></option><option selected="selected">${One.put_yn}</option></select>
 					</div>
 					<div class="form-group">
 						<label>입영일자</label> <input type="text" class="form-control mil datepicker" id="mil_startdate" name="mil_startdate" value="${One.mil_startdate} ">
@@ -196,7 +197,7 @@
 					</div>
 					<!-- id, name수정필요 -->
 					<div class="form-group">
-						<label>사업자등록증</label> <input type="text" class="form-control" id="cmp_reg_image" name="cmp_reg_image" value="${One.cmp_reg_image }">
+						<label>사업자등록증</label><input type="text" class="form-control" id="cmp_reg_image" name="cmp_reg_image" value="${One.cmp_reg_image}">
 					</div>
 					
 				</div>
@@ -208,17 +209,17 @@
 					<label>영문성명</label> <input type="text" class="form-control validate" id="eng_name" name="eng_name" value="${One.eng_name }"/>
 				</div>
 				<div class="form-group">
-					<label>*패스워드확인</label> <input type="password" class="form-control pwdChk" id="pwChk" name="pwChk" required="required">
+					<label>*패스워드확인</label> <input type="password" class="form-control pwdChk" id="pwChk" name="pwChk" required="required" value="${One.pwd }">
 				</div>
 				<div class="form-group">
 					<label>*주민번호</label> <input type="text" class="form-control hyphen" id="reg_no1" name="reg_no1" required="required" maxlength="14" value="${One.reg_no }">
-										  <input type="hidden" id="reg_no" name="reg_no">
+										  <input type="hidden" id="reg_no" name="reg_no"  value="${One.reg_no }">
 				</div>
 				<div class="form-group">
-					<label>직종체크</label> <select class="form-control" id="job_type" name="job_type" style="width:90px !important"><option>${One.job_type }</option></select>
+					<label>직종체크</label> <select class="form-control" id="job_type" name="job_type" style="width:90px !important"><option></option><option selected="selected">${One.job_type }</option></select>
 				</div>
 				<div class="form-group">
-					<label style="width:60px">성별</label> <select class="form-control" id="sex" name="sex" style="width:90px !important"><option>${One.sex }</option></select>
+					<label style="width:60px">성별</label> <select class="form-control" id="sex" name="sex" style="width:90px !important"><option></option><option selected="selected">${One.sex }</option></select>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="addr2" name="addr2" placeholder="세부주소" value="${One.addr2 }" style="width:344px !important">
@@ -227,13 +228,13 @@
 					<label>연봉(만원)</label> <input type="text" class="form-control" id="salary" name="salary" value="${One.salary }" style="text-align:right">
 				</div>
 				<div class="form-group">
-					<label>군필여부</label> <select class="form-control yn" id="mil_yn" name="mil_yn"><option>${one.mil_yn }</option></select>
+					<label>군필여부</label> <select class="form-control yn" id="mil_yn" name="mil_yn"><option></option><option selected="selected">${One.mil_yn}</option></select>
 				</div>
 				<div class="form-group">
 				<label>전역일자</label> <input type="text" class="form-control mil datepicker endDate" id="mil_enddate" name="mil_enddate" value="${One.mil_enddate }">
 				</div>
 				<div class="form-group">
-					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate" id="retire_day" name="retire_day"value="${retire_day }">
+					<label>퇴사일자</label> <input type="text" class="form-control datepicker endDate" id="retire_day" name="retire_day"value="${One.retire_day}">
 				</div>
 				<div class = "form-group">
 					<button type="button" class="form-control button" id="modal_show">미리보기</button>
@@ -243,12 +244,12 @@
 			<div class="grid" style="float: none; text-align: center; width :1221px" >
 				<div class="form-group">
 					<label style="width:104px">자기소개</label>
-					<textarea class="form-control" id="self_intro" name="self_intro" ${One.self_intro } style="width:450px !important"></textarea>
+					<textarea class="form-control" id="self_intro" name="self_intro"  style="width:450px !important">${One.self_intro}</textarea>
 				</div>
 				<div class="form-group">
-					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" value="${One.carrier }" style="margin-right:57px">
+					<label>이력서</label> <input type="text" class="form-control" id="carrier" name="carrier" value="${One.carrier}"style="margin-right:57px">
 				</div>
-				<div class="form-group">
+				<div class="form-group" style="float:right">
 					<button type="button" class="form-control button" id="modal_show2">미리보기</button>
 					<input type ="file" name="carrier_image_file" id ="carrier_image_file" class="form-control button" value="등록" onchange="carrierFile(this)">	
 				</div>
@@ -266,7 +267,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="" class="img" id="car_img" > 
+                    <img src="upload/${One.carrier}" class="img" id="car_img" > 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -285,7 +286,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img src="" class="img" id="cmp_img" > 
+                    <img src="upload/${One.cmp_reg_image}" class="img" id="cmp_img" > 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -293,210 +294,14 @@
             </div>
         </div>
     </div>
-	<script>
-   			$(()=>{
-   				setting();
-   				//dis();
-   				$('.validate').keyup(function(){ 
-	   				var name = $(this).attr('id');
-					var input = $(this).val();
-					if(name=='name'){
-						var regExp= new RegExp(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g);				
-					}else if(name=='eng_name' ){
-						var regExp= new RegExp(/[^a-zA-Z]/);
-					}
-					$(this).val(input.replace(regExp,''));
-   				});
-   				
-   				$('.pwdChk').change(function(){
-   					var input = $(this).val();
-   					var pwd = $('#pwd').val();
-   					if(pwd !=input){
-   						alert('비밀번호가 맞지 않습니다.');
-   						$('#pwd,#pwChk').css({'border':'red 2px solid'});
-   					}
-   					else {
-   						$('#pwd,#pwChk').css({'border':'blue 2px solid'});
-   					}
-   				});
-   				
-   				$('.duplicate').change(function() {
-   					
-   					var input = $(this).val();
-   					
-   					$.ajax({
-   			            async: true,
-   			            type : 'POST',
-   			            data : {"input" : input},
-   			            url : "/regist/idCheck",
-   			            dataType : "json", 
-   			            success : function(data) {
-   			                if (data == 1) {
-   			                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");			                    
-      			            }else {
-   			                    alert("사용가능한 아이디입니다.");
-   			                }
-   			            }
-   			        });
-   				});
-   				$('.hyphen').keyup(function (e) {
-   					var input = $(this).val();
-   					var name = $(this).attr('id');
-   					
-   					if( name == 'phone' || name == 'hp'){//010-0332-3232
-   						$(this).val(input.replace(/[^0-9]/g,"").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
-   					}else if(name == 'cmp_reg_no'){//사업자번호
-   						$(this).val(input.replace(/[^0-9]/g,"").replace(/([0-9]{3})([0-9]{2})([0-9]+)?/,"$1-$2-$3").replace("--","-"));
-   					}else if(name == 'reg_no1'){
-	   					var str1 = input.substring(0,input.length);
-	   					var str2 = input.substring(7,input.length);
-   						if(input.length==6){
-   							$(this).val(str1+'-');		
-   						}else if($(this).length){
-   							$(this).append(str2);
-   						}
-   					} //주민번호 */
-   				});
-   				$('#reg_no1').change(function(){
-   					var str = $(this).val();
-   					$('#reg_no').val(str);
-   					var str2 = str.substring(0,8);
-   					var sex = str.substring(7,8);
-   					var birth = str.substring(0,2);
-   					var now = new Date();	// 현재 날짜 및 시간
-   					var year = now.getFullYear();	// 연도
-   					var age = (year-birth+1)-1900;
-   					$(this).val(str2+'******');
-   					if(sex=='1'||sex=='3'){
-   						$('#sex').val('남');
-   					}else{
-   						$('#sex').val('여');
-   					}
-   					if(birth<30){
-   						$('#years').val(age-100);
-   					}else{
-   						$('#years').val(age);
-   					}
-   						
-   				});
-   				
-   				$('.yn').change(function(){
-   					var mil = $('#mil_yn').val();
-   				 	var mil_type = $('#mil_type').val();
-   					var kosa = $('#kosa_reg_yn').val();
-   					
-   					if(mil=='N'||mil_type =="미필"){
-   						$('.mil').prop('disabled', true);
-   						$('.mil').val('');
-   					}else{
-   						$('.mil').prop('disabled', false);
-   					}
-   					if(kosa=='N'){
-   						$('.kosa').prop('disabled', true);
-   						$('.kosa').val('');
-   					}else{
-   						$('.kosa').prop('disabled', false);
-   					}
-   						
-   					
-   					
-   				});
-   				
-   				$('.endDate').change(function(){
-   					var mil_startdate = $('#mil_startdate').val();
-   					var mil_enddate = $('#mil_enddate').val();
-   					var mil_startdateArr = mil_startdate.split('/');
-   					var mil_enddateArr = mil_enddate.split('/');
-   					var join_day = $('#join_day').val();
-   					var retire_day = $('#retire_day').val();
-   					var join_dayArr = join_day.split('/');
-   					var retire_dayArr = retire_day.split('/');
-   					
-   					var mil_end_compare = new Date(mil_enddateArr[2], parseInt(mil_enddateArr[0])-1, mil_enddateArr[1]);
-					var mil_start_compare = new Date(mil_startdateArr[2], parseInt(mil_startdateArr[0])-1, mil_startdateArr[1]);   					
-   					
-					var join_day_compare = new Date(join_dayArr[2], parseInt(join_dayArr[0])-1, join_dayArr[1] );
-					var retire_day_compare = new Date(retire_dayArr[2], parseInt(retire_dayArr[0])-1, retire_dayArr[1] );
-   					
-   					if(mil_start_compare > mil_end_compare){
-   						alert('입영날짜를 확인해주세요!');
-   						$('#mil_enddate').val('');
-   					}
-   					
-   					if(join_day_compare > retire_day_compare){
-   						alert('입사날짜를 확인해주세요!');
-   						$('#retire_day').val('');
-   					}
-   				});
-   				
-   				$('#search').click(function(){
-   					new daum.Postcode({
-   			            oncomplete: function(data) { //선택시 입력값 세팅
-   			            	$('#zip').val(data.zonecode);
-   			            	$('#addr1').val(data.address); // 주소 넣기
-   			                $('#addr2').focus(); //상세입력 포커싱
-   			            }
-   			        }).open();
-   				});
-   				
-   				$('#salary').keyup(function(){
-   					
-   					var x = $('#salary').val();
-   					x = x.replace(/,/gi, '');
-   				    
-   					var regexp = /^[0-9]*$/;
-
-   					if(!regexp.test(x)){ 
-   						$('#salary').val(""); 
-   						alert("숫자만 입력 가능합니다.");
-   					} else {
-   						x = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");			
-   						$('#salary').val(x);
-   					}
-   				});
-   			})
-   			
+    
+		<script>
+   	//한번 쭉돌려서 넣고 그담에 같은거 있으면 공백으로 바꿔주기
    			function setting (){
    				<c:forEach var="i" items="${list}">
    			 		$('#${i.name}').append('<option>${i.note}</option>');
    				</c:forEach>
    			}
-   			$(function(){
-   				$('.datepicker').datepicker({
-   				});
-   			});
-   			
-   			$(document).ready(function() {
-                $("#modal_show").click(function() {
-                    $("#cmpModal").modal("show");
-                });
-                $("#modal_show2").click(function() {
-                    $("#carModal").modal("show");
-                });
-     
-              
-            });
-      			
-      			function loadFile(input) {
-      				var profile = input.files[0].name;
-      			   	document.getElementById("profile_image").value=profile;
-      			    var file = input.files[0];
-      			    document.getElementById("profile_image").src = URL.createObjectURL(file);
-      			};
-      			function cmpFile(input) {
-      			    let cmpfile = input.files[0].name;
-      			    document.getElementById("cmp_reg_image").value = cmpfile;
-      			    let file = input.files[0];
-      			    document.getElementById("cmp_img").src = URL.createObjectURL(file);
-      			};
-      			function carrierFile(input) {
-      			    let carrierfile = input.files[0].name;
-      			    document.getElementById("carrier").value = carrierfile;
-      			    let file = input.files[0];
-      			    document.getElementById("car_img").src = URL.createObjectURL(file);
-      			};
-      			
-   			
    			
 		</script>
 
