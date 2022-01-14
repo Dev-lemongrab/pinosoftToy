@@ -146,8 +146,14 @@ public class ListController {
 	@RequestMapping(value="/selectOne")
 	public ModelAndView selectOne(String sabun) {
 		insertDto selectOne = insaServiceImpl.selectOne(sabun);
-		String car=selectOne.getCarrier().split("_")[1];
-		String cmp=selectOne.getCmp_reg_image().split("_")[1];
+		String car="";
+		String cmp="";
+		if(selectOne.getCarrier()!=null) {
+			car=selectOne.getCarrier().split("_")[1];
+		}
+		if(selectOne.getCmp_reg_image()!=null) {
+			cmp=selectOne.getCmp_reg_image().split("_")[1];
+		}
 		String emailArr[] = selectOne.getEmail().split("@");
 		
 		//이멜도메인
@@ -164,28 +170,74 @@ public class ListController {
 	}
 	
 	@RequestMapping(value="/modify")
-	public ModelAndView modify(insertDto dto, String email1, HttpServletRequest req, HttpSession session) throws IOException {
+	public ModelAndView modify(insertDto dto, String email1, HttpServletRequest req, HttpSession session, HttpServletResponse response) throws IOException {
 		ModelAndView mov = new ModelAndView();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
 		dto.setEmail(email1+dto.getEmail());//이메일 합쳐주기
+	
+		//파일업로드 하기 전에 파일 삭제 돼야함
+		String a =dto.getProfile_image();
+		String b = dto.getCmp_reg_image();
+		String c = dto.getCarrier();
 		
-
 		
+		
+		
+		
+		//파일업로드하는 부분
 		String root=req.getSession().getServletContext().getRealPath("/"); 
 		String path=root+"\\upload\\";
-		
-		
 		dto.fileCheck(dto,path);
 		
+		//업뎃
 		insaServiceImpl.update(dto);
 		
-		dto = insaServiceImpl.selectOne(dto.getSabun());
+		//다시 한명정보를 얻어옴
+		//dto = insaServiceImpl.selectOne(dto.getSabun());
 		
+		//스크립트 내용띄우기
+		String htmlCode = "<script> \r\n"//자바스크립트 내용 \ㅜ줄띄우기 
+				+ "alert(\"Complete\"); \r\n"
+				+ "</script>";
+		out.print(htmlCode);
+		out.flush();
 		
+		//페이징처리
+		boardDto bDto =(boardDto)session.getAttribute("bDto");
 		
-		mov.setViewName("redirect:/listViewPaging?nowPage=1&cntPerPage=5");
+		int total = insaServiceImpl.countBoard(bDto);
+		int nowPage = bDto.getNowPage(); 
+		int cntPerPage = bDto.getCntPerPage();
+				
+				
+		if (nowPage==0 && cntPerPage==0) {
+			nowPage = 1;
+			cntPerPage = 5;
+		} else if (nowPage==0) {
+			nowPage = 1;
+		} else if (cntPerPage == 0) { 
+			cntPerPage = 5;
+		}
+				
+		bDto.pagingSet(total, nowPage, cntPerPage);
+		ArrayList<insertDto> contents =  insaServiceImpl.selectInsa(bDto);
+		mov.addObject("paging", bDto);
+		mov.addObject("list", insaServiceImpl.setService());
+		mov.addObject("contents" , contents);
+		mov.setViewName("list");
+		
+		//검색했던 내용 보존시켜주기위함
+		session.setAttribute("bDto", bDto);
+		
+	
+		//mov.setViewName("redirect:/listViewPaging?nowPage=1&cntPerPage=5");
+		//업뎃한 내용을 다시 세션에 띄워줌
 		session.setAttribute("One", dto);
 		
 	
+		
 		return mov;
 	}
 	

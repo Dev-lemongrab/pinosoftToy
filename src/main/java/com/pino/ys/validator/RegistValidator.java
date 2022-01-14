@@ -16,7 +16,6 @@ public class RegistValidator implements Validator{
 	private Pattern pattern;
 	
 	
-	
 	public RegistValidator() {
 		pattern= Pattern.compile(nameExp);
 	}
